@@ -104,11 +104,15 @@ function addWord() {
 function editWord(index) {
     const newWord = prompt('Edit word:', wordBank[index]);
     if (newWord) {
-        wordBank.splice(index, 1);
+        const cleaned = newWord.trim().toUpperCase();
+        if (!cleaned) return;
+
+        wordBank[index] = cleaned;  // ✅ FIX: update instead of removing
         saveWordBank();
         displayWordBank();
     }
 }
+
 
 function deleteWord(index) {
     if (confirm('Are you sure you want to delete this word?')) {
